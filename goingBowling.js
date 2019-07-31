@@ -6,6 +6,8 @@
 //TODO
 //strike = 10 + sum of next 2
 //spare = 10 + sum of next shot
+//last frame can have 3 shots if frame is a strike or spare
+//last frame score is total number of pins knocked down in final frame
 
 //create scorecard UI
 //create button on UI that starts sim
@@ -25,17 +27,19 @@ let frame = () => {
     score = bowl();
     // console.log(`score: ${score}`);
     
-    shot++
+    shot += 1;
     if(score < 10){
         // console.log(`next shot: ${bowl(pins - score)}\n`);
         
         score += bowl(pins - score)
         shot++;
     } else {
-        return 10
-    }
+        score = 10
+    }   
+    // console.log(shot)
     // console.log(`this many throws: ${shot}`)
-    return score;
+    console.log({ score: score, shots: shot });
+    return { score: score, shots: shot };
 }
 
 let game = () => {
@@ -43,7 +47,7 @@ let game = () => {
     while(frames.length < 10) {
         frames.push(frame());
     }
-    // console.log(`frames: ${frames}`)
+    console.log(`frames: ${frames}`)
     return frames
 }
 

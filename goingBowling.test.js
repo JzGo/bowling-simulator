@@ -9,8 +9,11 @@ describe("bowl", () => {
 
 describe("frame", () => {
     it("generates a score for each frame", () => {
-        expect(bowling.frame()).toBeGreaterThan(-1);
-        expect(bowling.frame()).toBeLessThan(11);
+        expect(bowling.frame().score).toBeGreaterThan(-1);
+        expect(bowling.frame().score).toBeLessThan(11);
+    })
+    it("tracks number of shots", () => {
+        expect(bowling.frame().shots).toBeGreaterThan(0);
     })
 
 })
