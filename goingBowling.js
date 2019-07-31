@@ -1,6 +1,16 @@
-//10 pins
-//10 frames
-//2 bowls per frame unless 1st is a strike
+//10 pins X
+//10 frames X
+//2 bowls per frame unless 1st is a strike X
+//jest setup X
+
+//TODO
+//strike = 10 + sum of next 2
+//spare = 10 + sum of next shot
+
+//create scorecard UI
+//create button on UI that starts sim
+//scorecard updates as shots are made
+//be able to enter a player name
 
 //
 
