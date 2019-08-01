@@ -4,7 +4,7 @@ This is a solution to a coding challenge I have received.
 
 ### Challenge Description:
 
-Simulate a bowling game that generates random shots and tracks scores for a game.
+Simulate a bowling game that generates random shots and tracks scores for a game using Javascript.
 
 ### Notes on my solution:
 
