@@ -20,34 +20,90 @@ let bowl = (pins=11) => {
     return Math.floor(Math.random() * Math.floor(pins));
 }
 
-let frame = () => {
+let bowlingFrame = (lastFrame=false) => {
     let pins = 10;
     let shot = 0;
     let score = 0;
     score = bowl();
+    let firstShot = score;
     // console.log(`score: ${score}`);
+
+    //TODO: convert to storing all shot scores (up to 3)
     
-    shot += 1;
-    if(score < 10){
-        // console.log(`next shot: ${bowl(pins - score)}\n`);
-        
-        score += bowl(pins - score)
-        shot++;
+    shot++;
+    if (lastFrame) {
+        if(score < 10){
+            // console.log(`next shot: ${bowl(pins - score)}\n`);
+            score += bowl(pins - score)
+            shot++;
+            if (score === 10) {
+                score += bowl()
+                shot++;
+            }
+        } else {
+            score = 10;
+            score += bowl()
+            shot++;
+            if (score === 10) {
+                score += bowl();
+                shot++;
+            } else {
+                score += bowl(pins - score);
+                shot++;
+            }
+        }
     } else {
-        score = 10
-    }   
+        if(score < 10){
+            // console.log(`next shot: ${bowl(pins - score)}\n`);
+            
+            score += bowl(pins - score)
+            shot++;
+        } else {
+            score = 10;
+        } 
+    }
     // console.log(shot)
     // console.log(`this many throws: ${shot}`)
-    console.log({ score: score, shots: shot });
-    return { score: score, shots: shot };
+    // console.log({ score: score, shots: shot });
+    return { firstShot: firstShot, score: score, shots: shot }
 }
+
+// let calcTotal = (allFrames) => {
+//     if (allFrames.length === 10) {
+//         return;
+//     }
+//     if (allFrames.length === 1) {
+//         return allFrames;
+//     }
+//     let currFrame = allFrames[allFrames.length - 1];
+//     let lastFrame = allFrames[allFrames.length - 2];
+//     let secLastFrame = allFrames[allFrames.length - 3];
+    
+//     let calcFrames = allFrames.map((frame, frameIndex, frames) => {
+//         let totalScore = 0;
+//         for(let prevFrames = 0; prevFrames < frameIndex; prevFrames++) {
+//             totalScore+=frames[prevFrames].score;
+//             return totalScore;
+//         }
+//     })
+//     console.log(calcFrames)
+//     return calcFrames
+// }
 
 let game = () => {
     let frames = [];
+    let scoreCard;
+    let currFrame = 0;
     while(frames.length < 10) {
-        frames.push(frame());
+        let frame = frames.length === 9 ? bowlingFrame(true) : bowlingFrame()
+        //should frame return total or just frame result?
+        //perhaps have a calcTotal function that returns a total for the frame
+        //if first frame assign first frame
+        //if last frame
+        frames.push(frame);
+
     }
-    console.log(`frames: ${frames}`)
+    console.log(frames)
     return frames
 }
 
@@ -55,6 +111,6 @@ console.log(game())
 
 module.exports = {
     bowl,
-    frame,
+    bowlingFrame,
     game
 }
