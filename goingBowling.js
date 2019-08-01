@@ -6,7 +6,7 @@
 //TODO
 //strike = 10 + sum of next 2
 //spare = 10 + sum of next shot
-//last frame can have 3 shots if frame is a strike or spare
+//last frame can have 3 shots if frame is a strike or spare X
 //last frame score is total number of pins knocked down in final frame
 
 //create scorecard UI
@@ -26,14 +26,10 @@ let bowlingFrame = (lastFrame=false) => {
     let score = 0;
     score = bowl();
     let firstShot = score;
-    // console.log(`score: ${score}`);
-
-    //TODO: convert to storing all shot scores (up to 3)
     
     shot++;
     if (lastFrame) {
         if(score < 10){
-            // console.log(`next shot: ${bowl(pins - score)}\n`);
             score += bowl(pins - score)
             shot++;
             if (score === 10) {
@@ -62,12 +58,10 @@ let bowlingFrame = (lastFrame=false) => {
             score = 10;
         } 
     }
-    // console.log(shot)
-    // console.log(`this many throws: ${shot}`)
-    // console.log({ score: score, shots: shot });
     return { firstShot: firstShot, score: score, shots: shot }
 }
 
+//TODO: updates and returns scoreCard
 // let calcTotal = (allFrames) => {
 //     if (allFrames.length === 10) {
 //         return;
@@ -96,10 +90,6 @@ let game = () => {
     let currFrame = 0;
     while(frames.length < 10) {
         let frame = frames.length === 9 ? bowlingFrame(true) : bowlingFrame()
-        //should frame return total or just frame result?
-        //perhaps have a calcTotal function that returns a total for the frame
-        //if first frame assign first frame
-        //if last frame
         frames.push(frame);
 
     }
