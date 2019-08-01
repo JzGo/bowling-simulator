@@ -50,8 +50,6 @@ let bowlingFrame = (lastFrame=false) => {
         }
     } else {
         if(score < 10){
-            // console.log(`next shot: ${bowl(pins - score)}\n`);
-            
             score += bowl(pins - score)
             shot++;
         } else {
